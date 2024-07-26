@@ -33,6 +33,8 @@ model = RandomForestClassifier(n_estimators=100, random_state=42)
 # Latih model
 model.fit(X_train, y_train)
 
+# Judul web
+st.title('Prediksi Kepuasan Pelanggan')
 
 # Input data
 Age = st.text_input('Age')
