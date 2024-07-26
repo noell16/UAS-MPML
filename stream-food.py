@@ -44,117 +44,32 @@ Marital_Status = st.text_input('Marital Status')
 
 Kepuasan = ''
 
-import streamlit as st
-
-# Fungsi untuk melakukan konversi dan validasi input
-def convert_and_validate_input(Age, Feedback, Monthly_Income, Marital_Status):
+# Membuat tombol untuk prediksi
+if st.button('Prediksi Kepuasan'):
     try:
+        # Convert input to appropriate data types
         age = float(Age) if Age else None
+        feedback = Feedback
         monthly_income = float(Monthly_Income) if Monthly_Income else None
-        feedback = int(Feedback) if Feedback else None
-        marital_status = int(Marital_Status) if Marital_Status else None
+        marital_status = Marital_Status
 
-        if age is None or feedback is None or monthly_income is None or marital_status is None:
+        if age is None or monthly_income is None:
             st.error("Pastikan semua input diisi dengan angka yang valid.")
-            return None
         else:
-            return age, feedback, monthly_income, marital_status
+            # Melakukan prediksi
+            Satisfaction = model.predict([[age, feedback, monthly_income, marital_status]])
+
+            # Menentukan kategori harga berdasarkan prediksi
+            if Satisfaction[0] == 1:
+                Kepuasan = 'Yes'
+            elif Satisfaction[0] == 2:
+                Kepuasan = 'No'
+            else:
+                Kepuasan = 'NotFound'
+            
+            st.success(Kepuasan)
 
     except ValueError:
         st.error("Pastikan semua input diisi dengan angka yang valid.")
-        return None
-
-# Fungsi utama untuk melakukan prediksi
-def main():
-    st.title("Prediksi Kepuasan")
-
-    # Input dari pengguna
-    Age = st.text_input("Usia")
-    Feedback = st.text_input("Feedback (1 atau 2)")
-    Monthly_Income = st.text_input("Pendapatan Bulanan")
-    Marital_Status = st.text_input("Status Pernikahan (1 atau 2)")
-
-    if st.button("Prediksi"):
-        try:
-            # Konversi dan validasi input
-            input_data = convert_and_validate_input(Age, Feedback, Monthly_Income, Marital_Status)
-
-            if input_data:
-                age, feedback, monthly_income, marital_status = input_data
-
-                # Melakukan prediksi
-                Satisfaction = model.predict([[age, feedback, monthly_income, marital_status]])
-
-                # Menentukan kategori kepuasan berdasarkan prediksi
-                if Satisfaction[0] == 1:
-                    Kepuasan = 'Yes'
-                elif Satisfaction[0] == 2:
-                    Kepuasan = 'No'
-                else:
-                    Kepuasan = 'NotFound'
-                
-                st.success(f"Kepuasan: {Kepuasan}")
-
-        except Exception as e:
-            st.error(f"Terjadi kesalahan: {e}")
-
-# Jalankan aplikasi
-if __name__ == "__main__":
-    main()
-import streamlit as st
-
-# Fungsi untuk melakukan konversi dan validasi input
-def convert_and_validate_input(Age, Feedback, Monthly_Income, Marital_Status):
-    try:
-        age = float(Age) if Age else None
-        monthly_income = float(Monthly_Income) if Monthly_Income else None
-        feedback = int(Feedback) if Feedback else None
-        marital_status = int(Marital_Status) if Marital_Status else None
-
-        if age is None or feedback is None or monthly_income is None or marital_status is None:
-            st.error("Pastikan semua input diisi dengan angka yang valid.")
-            return None
-        else:
-            return age, feedback, monthly_income, marital_status
-
-    except ValueError:
-        st.error("Pastikan semua input diisi dengan angka yang valid.")
-        return None
-
-# Fungsi utama untuk melakukan prediksi
-def main():
-    st.title("Prediksi Kepuasan")
-
-    # Input dari pengguna
-    Age = st.text_input("Usia")
-    Feedback = st.text_input("Feedback (1 atau 2)")
-    Monthly_Income = st.text_input("Pendapatan Bulanan")
-    Marital_Status = st.text_input("Status Pernikahan (1 atau 2)")
-
-    if st.button("Prediksi"):
-        try:
-            # Konversi dan validasi input
-            input_data = convert_and_validate_input(Age, Feedback, Monthly_Income, Marital_Status)
-
-            if input_data:
-                age, feedback, monthly_income, marital_status = input_data
-
-                # Melakukan prediksi
-                Satisfaction = model.predict([[age, feedback, monthly_income, marital_status]])
-
-                # Menentukan kategori kepuasan berdasarkan prediksi
-                if Satisfaction[0] == 1:
-                    Kepuasan = 'Yes'
-                elif Satisfaction[0] == 2:
-                    Kepuasan = 'No'
-                else:
-                    Kepuasan = 'NotFound'
-                
-                st.success(f"Kepuasan: {Kepuasan}")
-
-        except Exception as e:
-            st.error(f"Terjadi kesalahan: {e}")
-
-# Jalankan aplikasi
-if __name__ == "__main__":
-    main()
+    except Exception as e:
+        st.error(f"Terjadi kesalahan: {e}")
