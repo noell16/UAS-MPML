@@ -14,6 +14,12 @@ food = pd.read_csv('onlinefoods.csv')
 # Remove unnecessary columns
 food_cleaned = food.drop(columns=['Unnamed: 12'])
 
+# Perform one-hot encoding on categorical variables
+food_encoded = pd.get_dummies(food_cleaned, columns=[
+    'Gender', 'Marital Status', 'Occupation', 'Monthly Income',
+    'Educational Qualifications', 'Feedback', 'Output'
+])
+
 # Define features and target variable
 X = food_encoded.drop(columns=['Output_No', 'Output_Yes'])
 y = food_encoded['Output_Yes']
