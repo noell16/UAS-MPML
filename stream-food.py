@@ -1,4 +1,28 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
+#Data
+food = pd.read_csv('onlinefoods.csv')
+
+# Remove unnecessary columns
+food_cleaned = food.drop(columns=['Unnamed: 12'])
+
+# Define features and target variable
+X = food_encoded.drop(columns=['Output_No', 'Output_Yes'])
+y = food_encoded['Output_Yes']
+
+# Inisialisasi model Random Forest
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+
+# Latih model
+model.fit(X_train, y_train)
 
 
 # Input data
@@ -22,7 +46,7 @@ if st.button('Prediksi'):
             st.error("Pastikan semua input diisi dengan angka yang valid.")
         else:
             # Melakukan prediksi
-            Satisfaction = food_model.predict([[age, feedback, monthly_income, marital_status]])
+            Satisfaction = model.predict([[age, feedback, monthly_income, marital_status]])
 
             # Menentukan kategori harga berdasarkan prediksi
             if Satisfaction[0] == 1:
