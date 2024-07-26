@@ -45,7 +45,7 @@ Marital_Status = st.text_input('Marital Status')
 Kepuasan = ''
 
 # Membuat tombol untuk prediksi
-if st.button('Prediksi Kepuasan'):
+if st.button('Prediksi Kepuasan Pelanggan'):
     try:
         # Convert input to appropriate data types
         age = float(Age) if Age else None
@@ -57,7 +57,7 @@ if st.button('Prediksi Kepuasan'):
             st.error("Pastikan semua input diisi dengan angka yang valid.")
         else:
             # Melakukan prediksi
-            Satisfaction = model.predict([[age, feedback, monthly_income, marital_status]])
+            Satisfaction = food_encoded.predict([[age, feedback, monthly_income, marital_status]])
 
             # Menentukan kategori harga berdasarkan prediksi
             if Satisfaction[0] == 1:
