@@ -57,7 +57,7 @@ if st.button('Prediksi Kepuasan'):
             st.error("Pastikan semua input diisi dengan angka yang valid.")
         else:
             # Melakukan prediksi
-            Satisfaction = food.predict([[age, feedback, monthly_income, marital_status]])
+            Satisfaction = food_encoded.predict([[age, feedback, monthly_income, marital_status]])
 
             # Menentukan kategori harga berdasarkan prediksi
             if Satisfaction[0] == 1:
