@@ -35,10 +35,10 @@ model.fit(X_train, y_train)
 
 
 # Input data
-Age = st.text_input('Age', key="A1")
-Feedback = st.text_input('Feedback', key="A2")
-Monthly_Income = st.text_input('Monthly Income', key="A3")
-Marital_Status = st.text_input('Marital Status', key="A4")
+Age = st.text_input('Age')
+Feedback = st.text_input('Feedback')
+Monthly_Income = st.text_input('Monthly Income')
+Marital_Status = st.text_input('Marital Status')
 
 Kepuasan = ''
 
