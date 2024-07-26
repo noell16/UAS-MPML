@@ -1,7 +1,5 @@
-pandas==2.2.2
+pandas
 ast
 pickle
 streamlit
 scikit-learn
-joblib
-pip==24.0
