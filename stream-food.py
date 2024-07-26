@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 
 #Data
@@ -23,6 +23,9 @@ food_encoded = pd.get_dummies(food_cleaned, columns=[
 # Define features and target variable
 X = food_encoded.drop(columns=['Output_No', 'Output_Yes'])
 y = food_encoded['Output_Yes']
+
+# Misalnya, data X dan target y
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
 # Inisialisasi model Random Forest
 model = RandomForestClassifier(n_estimators=100, random_state=42)
