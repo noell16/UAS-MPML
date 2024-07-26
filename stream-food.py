@@ -43,7 +43,7 @@ Marital_Status = st.text_input('Marital Status')
 Kepuasan = ''
 
 # Membuat tombol untuk prediksi
-if st.button('Prediksi'):
+if st.button('Prediksi Kepuasan'):
     try:
         # Convert input to appropriate data types
         age = float(Age) if Age else None
